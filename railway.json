@@ -2,9 +2,9 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "composer install --no-dev --no-scripts --optimize-autoloader && php artisan package:discover --ansi"
+    "buildCommand": "composer install --no-dev --no-scripts --optimize-autoloader"
   },
   "deploy": {
-    "startCommand": "php artisan migrate --force && php artisan config:cache && php artisan event:cache && php artisan serve --host 0.0.0.0 --port $PORT"
+    "startCommand": "rm -rf bootstrap/cache/*.php && php artisan package:discover && php artisan install --db-host=$DB_HOST --db-port=$DB_PORT --db-name=$DB_DATABASE --db-username=$DB_USERNAME --db-password=$DB_PASSWORD --admin-email=admin@company.com --admin-password=YourSecurePassword123 --admin-name=Admin --company-name=MyCompany --company-email=admin@company.com && php artisan config:cache && php artisan event:cache && php artisan serve --host 0.0.0.0 --port $PORT"
   }
 }
