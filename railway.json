@@ -2,9 +2,9 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "composer install --no-dev && npm install && npm run build && php artisan config:cache && php artisan event:cache"
+    "buildCommand": "export NODE_OPTIONS=--max-old-space-size=4096 && composer install --no-dev --no-scripts && npm install && npm run prod"
   },
   "deploy": {
-    "startCommand": "php artisan migrate --force && php artisan serve --host 0.0.0.0 --port $PORT"
+    "startCommand": "php artisan migrate --force && php artisan config:cache && php artisan event:cache && php artisan serve --host 0.0.0.0 --port $PORT"
   }
 }
